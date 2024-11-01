@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cricket Score Prediction</title>
+</head>
+<body>
+    <h1>Cricket Score Prediction</h1>
+    <p>Please select the following features to get the prediction</p>
+    <form action="/predict" method="post">
+        <label for="batting_team">Batting Team:</label>
+        <select name="batting_team" id="batting_team">
+            {% for team in teams %}
+                <option value="{{ team }}">{{ team }}</option>
+            {% endfor %}
+        </select>
+        <br><br>
+
+        <label for="bowling_team">Bowling Team:</label>
+        <select name="bowling_team" id="bowling_team">
+            {% for team in teams %}
+                <option value="{{ team }}">{{ team }}</option>
+            {% endfor %}
+        </select>
+        <br><br>
+
+        <label for="city">City:</label>
+        <select name="city" id="city">
+            {% for city in cities %}
+                <option value="{{ city }}">{{ city }}</option>
+            {% endfor %}
+        </select>
+        <br><br>
+
+        <label for="current_score">Current Score:</label>
+        <input type="number" name="current_score" id="current_score" min="0">
+        <br><br>
+
+        <label for="overs_done">Overs Done (works for overs > 5):</label>
+        <input type="number" name="overs_done" id="overs_done" min="5" max="20" step="0.1">
+        <br><br>
+
+        <label for="wickets_down">Wickets Down:</label>
+        <input type="number" name="wickets_down" id="wickets_down" min="0" max="10">
+        <br><br>
+
+        <label for="last_five">Runs Scored in Last 5 Overs:</label>
+        <input type="number" name="last_five" id="last_five" min="0">
+        <br><br>
+
+        <button type="submit">Predict Score</button>
+    </form>
+
+    {% if prediction %}
+        <h2>Predicted Final Score: {{ prediction }}</h2>
+    {% endif %}
+
+    {% if error %}
+        <h2 style="color: red;">Error: {{ error }}</h2>
+    {% endif %}
+</body>
+</html>
